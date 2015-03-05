@@ -10,7 +10,11 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 import sys
-import res
+from A07.res import *
+
+# HINWEIS: Ui_MainWindow muss von QMainWindow erben nicht von "object"!
+from A07.sphere import Sphere
+
 
 class Ui_MainWindow(QMainWindow):
     def __init__(self, parent=None):
@@ -22,6 +26,11 @@ class Ui_MainWindow(QMainWindow):
         self.setupUi(self)
 
     def setupUi(self, MainWindow):
+        """
+        ERSTELLT DIE GUI
+        :param MainWindow:
+        :return:
+        """
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(750, 600)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
@@ -98,15 +107,29 @@ class Ui_MainWindow(QMainWindow):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Welcome to our Solarsystem"))
+        # Titel
+        self.menuA07.setTitle(_translate("MainWindow", "A07"))
+
+        # Button text
         self.start_Button.setText(_translate("MainWindow", "START"))
         self.tutorial_Button.setText(_translate("MainWindow", "TUTORIAL"))
-        self.menuA07.setTitle(_translate("MainWindow", "A07"))
+
+        self.start_Button.clicked.connect(self.printHam)
+
+
+    def printHam(self):
+        self.close()
+        s = Sphere()
+        s.main()
+
+
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    view = Ui_MainWindow()
-    view.show()
-    sys.exit(app.exec_())
+    view = Ui_MainWindow() #CREATE - VIEW
+    view.show()            #SHOW - View
+    sys.exit(app.exec_())  #EXECUTE Funktionen
 
 
 
