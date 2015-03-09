@@ -14,20 +14,39 @@ class Sphere:
         display = (800, 600)
         pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
 
-        gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
+        gluPerspective(33, (display[0]/display[1]), 0.1, 50.0)
+        """gluLookAt(
+            0,1,20, # eyepoint
+            0,0,0, # center-of-view
+            0,1,0, # up-vector
+	    )"""
         glTranslatef(0.0, 0.0, -15)
         glRotatef(1, 3, 1, 1)
         self.setupLighting()
+        x = 1
         while True:
             for event in pygame.event.get():
+                print(event)
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_UP:
+                        print("key UP")
+                        if x == 7:
+                            print("maximum")
+                        else :
+                            x += 1
+                            print(x)
+                    if event.key == pygame.K_DOWN:
+                        print("key down")
+                        x -= 1
+
 
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
             color = [0.0, 0.5, 0.8, 1.]
             glMaterialfv(GL_FRONT, GL_DIFFUSE, color)
-            glutSolidSphere(1, 60, 20)
+            glutSolidSphere(x, 200, 20)
             glRotatef(1, 0, 1, 0)
             pygame.display.flip()
             pygame.time.wait(10)
@@ -61,4 +80,5 @@ class Sphere:
         glShadeModel(GL_SMOOTH)
 
 if __name__ == '__main__':
-    main()
+    s = Sphere()
+    s.main()

@@ -114,10 +114,10 @@ class Ui_MainWindow(QMainWindow):
         self.start_Button.setText(_translate("MainWindow", "START"))
         self.tutorial_Button.setText(_translate("MainWindow", "TUTORIAL"))
 
-        self.start_Button.clicked.connect(self.printHam)
+        self.start_Button.clicked.connect(self.starteGUI)
 
 
-    def printHam(self):
+    def starteGUI(self):
         self.close()
         s = Sphere()
         s.main()
