@@ -122,9 +122,6 @@ class Ui_MainWindow(QMainWindow):
         s = Sphere()
         s.main()
 
-
-
-
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     view = Ui_MainWindow() #CREATE - VIEW
