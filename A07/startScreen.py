@@ -12,8 +12,11 @@ from PyQt5.QtWidgets import *
 import sys
 from A07.res import *
 
+
+
 # HINWEIS: Ui_MainWindow muss von QMainWindow erben nicht von "object"!
-from A07.sphere import Sphere
+from A07.sphere import sphere
+
 
 
 class Ui_MainWindow(QMainWindow):
@@ -119,7 +122,7 @@ class Ui_MainWindow(QMainWindow):
 
     def starteGUI(self):
         self.close()
-        s = Sphere()
+        s = sphere()
         s.main()
 
 if __name__ == "__main__":

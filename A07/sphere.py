@@ -6,6 +6,7 @@ from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
 import pyglet
+from Stern import Stern
 
 name = 'ball_glut'
 
@@ -74,11 +75,12 @@ class Sphere:
 
             glEnable(GL_TEXTURE_2D)
             glBindTexture(GL_TEXTURE_2D, self.texture_sonne)
-            sphere = gluNewQuadric()
-            gluQuadricNormals(sphere,GLU_SMOOTH)
-            gluQuadricTexture(sphere,GL_TRUE)
+            #sphere = gluNewQuadric()
+            #gluQuadricNormals(sphere,GLU_SMOOTH)
+            #gluQuadricTexture(sphere,GL_TRUE)
 
-            gluSphere(sphere,5, 200, 400)
+           # gluSphere(sphere,5, 200, 400)
+            Stern.draw(5,200,400)
 
 
 
@@ -93,11 +95,12 @@ class Sphere:
 
 
             glBindTexture(GL_TEXTURE_2D, self.texture_erde)
-            sphere2 = gluNewQuadric()
-            gluQuadricNormals(sphere2,GLU_SMOOTH)
-            gluQuadricTexture(sphere2,GL_TRUE)
+            #sphere2 = gluNewQuadric()
+            #gluQuadricNormals(sphere2,GLU_SMOOTH)
+            #gluQuadricTexture(sphere2,GL_TRUE)
 
-            gluSphere(sphere2,2, 200, 400)
+            #gluSphere(sphere2,2, 200, 400)
+            Stern.draw(2,200,400)
 
 
             glPopMatrix()
