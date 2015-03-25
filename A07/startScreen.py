@@ -10,12 +10,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 import sys
-from A07.res import *
+from res import *
+from sphere import Sphere
+from Tutorial import Tutorial
 
 
 
 # HINWEIS: Ui_MainWindow muss von QMainWindow erben nicht von "object"!
-from A07.sphere import sphere
+
 
 
 
@@ -118,12 +120,18 @@ class Ui_MainWindow(QMainWindow):
         self.tutorial_Button.setText(_translate("MainWindow", "TUTORIAL"))
 
         self.start_Button.clicked.connect(self.starteGUI)
+        self.tutorial_Button.clicked.connect(self.starteTUT)
 
 
     def starteGUI(self):
         self.close()
-        s = sphere()
+        s = Sphere()
         s.main()
+
+    def starteTUT(self):
+        self.close()
+        t = Tutorial()
+        t.test()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
