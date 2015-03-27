@@ -8,6 +8,8 @@ from OpenGL.GL import *
 import pyglet
 from Stern import Stern
 
+
+
 name = 'ball_glut'
 
 class Sphere:
@@ -76,6 +78,8 @@ class Sphere:
                     else:
                         mouseClicked = 0
                         glEnable(GL_TEXTURE_2D)
+
+
 
 
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
