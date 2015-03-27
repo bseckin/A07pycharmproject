@@ -1,29 +1,29 @@
 __author__ = 'nermin'
 
-from PIL import Image
-import pygame
-import sys
-from pygame.locals import *
-from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
-import pyglet
 
 
-class Stern(object):
+class Stern:
 
     #def__init__(self,radius, slices, stacks)
         #self.Radius = radius
         #self.Slices = slices
        # self.Stacks = stacks
 
+    def createObject(self, radius, slices, stacks):
+        """
+        Erstellt eine Kugel mit gluSphere und erlaubt Texturierung darauf
 
-    def draw(radius, slices, stacks):
-         sphere = gluNewQuadric()
-         gluQuadricNormals(sphere, GLU_SMOOTH)
-         gluQuadricTexture(sphere, GL_TRUE)
-
-         gluSphere(sphere, radius, slices, stacks)
+        :param radius:
+        :param slices:
+        :param stacks:
+        :return:
+        """
+        sphere = gluNewQuadric()
+        gluQuadricNormals(sphere, GLU_SMOOTH)
+        gluQuadricTexture(sphere, GL_TRUE)
+        gluSphere(sphere, radius, slices, stacks)
 
 
 

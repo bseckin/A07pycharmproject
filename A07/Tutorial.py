@@ -15,7 +15,7 @@ class Tutorial():
         pygame.init()
         size =(700,500)
         screen = pygame.display.set_mode(size)
-        pygame.display.set_caption("My game")
+        pygame.display.set_caption("TUTORIAL")
         done = False
         clock = pygame.time.Clock()
 
@@ -28,9 +28,11 @@ class Tutorial():
             screen.fill(black)
 
             font = pygame.font.Font(None,25)
-            text = font.render("Hier das Tutorial",True,white)
-            screen.blit(text,[100,100])
+            text = font.render("Rechte Pfeiltaste '->' ... schneller!", True, white)
 
+            screen.blit(text,[100,100])
+            text = font.render("Linke Pfeiltaste '<-'  ... laaangsamer", True, white)
+            screen.blit(text,[100,150])
             pygame.display.flip()
             clock.tick(60)
     pygame.quit()

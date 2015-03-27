@@ -17,100 +17,91 @@ class Sphere:
 
         :return:
         """
-
-
         pygame.init()
-        glutInit(sys.argv)
-        glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH)
+        #glutInit(sys.argv)
+
         display = (800, 600)
         pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
-
+        pygame.display.set_caption("A07 - Welcome to our solar system")
         gluPerspective(33, (display[0]/display[1]), 0.1, 150.0)
         """gluLookAt(
             0,1,20, # eyepoint
             0,0,0, # center-of-view
             0,1,0, # up-vector
 	    )"""
-      #  glTranslatef(0.0, 0.0, -15)
-        glRotatef(1, 3, 1, 1)
-
+        glEnable(GL_TEXTURE_2D) # Texturierung aktivieren
 
         gluLookAt(0.0, 0.0, 10, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-        #self.LoadTextures2()
 
-        #self.loadTexture()
+        # Texturen laden
         self.texture_sonne = self.loadTexture("sonne.jpg")
         self.texture_erde = self.loadTexture("erde.png")
 
+        # Objekte als Stern definieren
+        Sonne = Stern()
+        Erde = Stern()
+        Mond = Stern()
+        rotationSpeed = 1
+        mouseClicked = 0
 
-
-        x = 1
-        glTranslate(0,0,-100)
+        glTranslate(0, 0, -50)
         while True:
             for event in pygame.event.get():
-                print(event)
+                #print(event)
                 if event.type == pygame.QUIT:
+                    """ Wenn schließen gedrueckt wurde -> pygame beenden"""
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
-                        print("key UP")
-                        if x == 7:
-                            print("maximum")
-                        else :
-                            x += 1
-                            print(x)
-                    if event.key == pygame.K_DOWN:
-                        print("key down")
-                        x -= 1
+                    if event.key == pygame.K_RIGHT:
+                        """ Erhoehe Geschwindigkeit """
+                        if(rotationSpeed > 5):
+                            print("TOO FAST")
+                        else:
+                            rotationSpeed += 1
+                    if event.key == pygame.K_LEFT:
+                        """ Verlangsame Geschwindigkeit """
+                        if(rotationSpeed <= 0):
+                            print("STOPPED ANIMATION")
+                            print(rotationSpeed)
+                            rotationSpeed = 0
+                        else:
+                            rotationSpeed -= 1
+                        print("key LEFT")
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print("MOSUE GEDRUECKT")
+                    if mouseClicked == 0:
+                        mouseClicked = 1 #Maus geklickt
+                        glDisable(GL_TEXTURE_2D)
+                    else:
+                        mouseClicked = 0
+                        glEnable(GL_TEXTURE_2D)
+
 
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+            self.setupLighting()    # Licht einschalten
+            glMatrixMode(GL_MODELVIEW)
 
-
-            glPushMatrix()
-            #color = [0.9, 0.6, 0.01]
-            #glColor3d(0.9, 0.6, 0.01)
-            #glMaterialfv(GL_FRONT, GL_DIFFUSE, color)
-
-
-            glEnable(GL_TEXTURE_2D)
+            glTranslate(0,0,0)
             glBindTexture(GL_TEXTURE_2D, self.texture_sonne)
-            #sphere = gluNewQuadric()
-            #gluQuadricNormals(sphere,GLU_SMOOTH)
-            #gluQuadricTexture(sphere,GL_TRUE)
-
-           # gluSphere(sphere,5, 200, 400)
-            Stern.draw(5,200,400)
-
-
-
-
-            self.setupLighting()
-            glPopMatrix()
+            Sonne.createObject(5, 200, 400)
+            glRotate(rotationSpeed, 0, 1, 0)
 
             glPushMatrix()
-            glColor3d(0, 0, 1)
-            glRotate(1,0,1,0)
-            glTranslate(20,0,0)
-
-
             glBindTexture(GL_TEXTURE_2D, self.texture_erde)
-            #sphere2 = gluNewQuadric()
-            #gluQuadricNormals(sphere2,GLU_SMOOTH)
-            #gluQuadricTexture(sphere2,GL_TRUE)
-
-            #gluSphere(sphere2,2, 200, 400)
-            Stern.draw(2,200,400)
-
-
+            glTranslate(20, 0, 0)
+            Erde.createObject(2,200,400)
             glPopMatrix()
 
+            # Noch ein Planet
+            glPushMatrix()
+            glBindTexture(GL_TEXTURE_2D, self.texture_erde)
+            glTranslate(-15, 0, 0)
+            Erde.createObject(1, 200,400)
+            glPopMatrix()
 
-            glRotatef(1, 0, 1, 0)
             pygame.display.flip()
             pygame.time.wait(10)
-
-
 
 
     def setupLighting(self):
@@ -119,7 +110,7 @@ class Sphere:
         glEnable(GL_CULL_FACE)
         glEnable(GL_DEPTH_TEST)
         glEnable(GL_LIGHTING)
-        lightZeroPosition = [0, 4., 10., 1.]
+        lightZeroPosition = [10, 8., 0., 1.]
         lightZeroColor = [0.8, 1.0, 0.8, 1.0] #green tinged
         glLightfv(GL_LIGHT0, GL_POSITION, lightZeroPosition)
         glLightfv(GL_LIGHT0, GL_DIFFUSE, lightZeroColor)
