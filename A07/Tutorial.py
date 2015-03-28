@@ -45,8 +45,10 @@ class Tutorial():
             screen.blit(text,[100,150])
             text = font.render("Mausklick --> Textur Ein/Ausblenden", True, black)
             screen.blit(text,[100,200])
+            text = font.render("L --> Licht Ein/Ausschalten", True, black)
+            screen.blit(text,[100,250])
             text = font.render("Space --> Zur Animation", True, black)
-            screen.blit(text,[100,300])
+            screen.blit(text,[100,350])
 
 
             pygame.display.flip()

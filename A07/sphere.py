@@ -5,8 +5,8 @@ from pygame.locals import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
-from A07.Stern import Stern
-from A07.Light import Light
+from Stern import Stern
+from Light import Light
 
 
 name = 'ball_glut'
@@ -22,13 +22,14 @@ class Sphere:
         pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
         pygame.display.set_caption("A07 - Welcome to our solar system")
 
-        gluPerspective(33, (display[0]/display[1]), 0.1, 150.0)
+        gluPerspective(39, (display[0]/display[1]), 0.1, 150.0)
         gluLookAt(0.0, 0.0, 10, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
         # Texturen laden
         glEnable(GL_TEXTURE_2D) # Texturierung aktivieren
         self.texture_sonne = self.loadTexture("sonne.jpg")
         self.texture_erde = self.loadTexture("erde.png")
+        self.texture_mond = self.loadTexture("mond.jpg")
         myLight = Light()
 
         # Objekte als Stern definieren
@@ -99,11 +100,11 @@ class Sphere:
             Erde.createObject(2,200,400)
             glPopMatrix()
 
-            # Noch ein Planet
+            # Mond erstellern
             glPushMatrix()
-            glBindTexture(GL_TEXTURE_2D, self.texture_erde)
-            glTranslate(-15, 0, 0)
-            Erde.createObject(1, 200,400)
+            glBindTexture(GL_TEXTURE_2D, self.texture_mond)
+            glTranslate(23.5, 0, 0)
+            Mond.createObject(0.5, 200,400)
             glPopMatrix()
 
             pygame.display.flip()
