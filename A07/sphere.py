@@ -5,9 +5,8 @@ from pygame.locals import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
-import pyglet
-from Stern import Stern
-
+from A07.Stern import Stern
+from A07.Light import Light
 
 
 name = 'ball_glut'
@@ -16,76 +15,79 @@ class Sphere:
     def main(self):
         """
         initialisiert pygame und erstellt opengl objekte
-
         :return:
         """
         pygame.init()
-        #glutInit(sys.argv)
-
         display = (800, 600)
         pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
         pygame.display.set_caption("A07 - Welcome to our solar system")
-        gluPerspective(33, (display[0]/display[1]), 0.1, 150.0)
-        """gluLookAt(
-            0,1,20, # eyepoint
-            0,0,0, # center-of-view
-            0,1,0, # up-vector
-	    )"""
-        glEnable(GL_TEXTURE_2D) # Texturierung aktivieren
 
+        gluPerspective(33, (display[0]/display[1]), 0.1, 150.0)
         gluLookAt(0.0, 0.0, 10, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
         # Texturen laden
+        glEnable(GL_TEXTURE_2D) # Texturierung aktivieren
         self.texture_sonne = self.loadTexture("sonne.jpg")
         self.texture_erde = self.loadTexture("erde.png")
+        myLight = Light()
 
         # Objekte als Stern definieren
         Sonne = Stern()
         Erde = Stern()
         Mond = Stern()
         rotationSpeed = 1
-        mouseClicked = 0
+        textureIsActive = True
+        lightON = True
 
         glTranslate(0, 0, -50)
         while True:
+            # --- EVENT HANDLING ---
             for event in pygame.event.get():
                 #print(event)
                 if event.type == pygame.QUIT:
-                    """ Wenn schließen gedrueckt wurde -> pygame beenden"""
+                    # Pygame beenden, wenn Fenster geschlossen wird.
                     pygame.quit()
                     quit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT:
-                        """ Erhoehe Geschwindigkeit """
+                        # Geschwind. von der Animation erhoehen
                         if(rotationSpeed > 5):
                             print("TOO FAST")
                         else:
                             rotationSpeed += 1
                     if event.key == pygame.K_LEFT:
-                        """ Verlangsame Geschwindigkeit """
+                        # Geschwind. verlangsamen bzw. stoppen
                         if(rotationSpeed <= 0):
                             print("STOPPED ANIMATION")
                             print(rotationSpeed)
                             rotationSpeed = 0
                         else:
                             rotationSpeed -= 1
-                        print("key LEFT")
+                    if event.key == pygame.K_l:
+                        print("PRESSED KEY L")
+                        if lightON == True:
+                            myLight.disableLight()
+                            lightON = False
+                        else:
+                            lightON = True
+
+
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    print("MOSUE GEDRUECKT")
-                    if mouseClicked == 0:
-                        mouseClicked = 1 #Maus geklickt
+                    print("MOUSE PRESSED!")
+                    if textureIsActive == True:        # Check ob Textur AN ist
                         glDisable(GL_TEXTURE_2D)
+                        textureIsActive = False
                     else:
-                        mouseClicked = 0
                         glEnable(GL_TEXTURE_2D)
-
-
+                        textureIsActive = True
 
 
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-            self.setupLighting()    # Licht einschalten
-            glMatrixMode(GL_MODELVIEW)
+            # LICHT einschalten
+            if lightON == True:
+                myLight.setupLighting()
 
+            #glMatrixMode(GL_MODELVIEW)
             glTranslate(0,0,0)
             glBindTexture(GL_TEXTURE_2D, self.texture_sonne)
             Sonne.createObject(5, 200, 400)
@@ -105,26 +107,14 @@ class Sphere:
             glPopMatrix()
 
             pygame.display.flip()
-            pygame.time.wait(10)
-
-
-    def setupLighting(self):
-        glClearColor(0.,0.,0.,1.)
-        glShadeModel(GL_SMOOTH)
-        glEnable(GL_CULL_FACE)
-        glEnable(GL_DEPTH_TEST)
-        glEnable(GL_LIGHTING)
-        lightZeroPosition = [10, 8., 0., 1.]
-        lightZeroColor = [0.8, 1.0, 0.8, 1.0] #green tinged
-        glLightfv(GL_LIGHT0, GL_POSITION, lightZeroPosition)
-        glLightfv(GL_LIGHT0, GL_DIFFUSE, lightZeroColor)
-        glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.1)
-        glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.05)
-        glEnable(GL_LIGHT0)
-
+            #pygame.time.wait(10) #unnötig eigentlich
 
     def loadTexture(self, pfad):
-
+        """
+        Ladet eine Textur/Bild mit dem angegebenen Pfad
+        :param pfad:
+        :return:
+        """
         #Load texture file
         data = Image.open(pfad)
         ix = data.size[0]
@@ -145,10 +135,9 @@ class Sphere:
 
         gluBuild2DMipmaps(GL_TEXTURE_2D, 3, ix, iy, GL_RGBA, GL_UNSIGNED_BYTE, data)
 
-
         return textures
 
+
 if __name__ == '__main__':
-     glutInit(sys.argv)
      s = Sphere()
      s.main()
