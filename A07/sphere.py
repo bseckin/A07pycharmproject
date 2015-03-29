@@ -22,7 +22,7 @@ class Sphere:
         pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
         pygame.display.set_caption("A07 - Welcome to our solar system")
 
-        gluPerspective(39, (display[0]/display[1]), 0.1, 150.0)
+        gluPerspective(59, (display[0]/display[1]), 0.1, 150.0)
         gluLookAt(0.0, 0.0, 10, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
         # Texturen laden
@@ -30,11 +30,13 @@ class Sphere:
         self.texture_sonne = self.loadTexture("sonne.jpg")
         self.texture_erde = self.loadTexture("erde.png")
         self.texture_mond = self.loadTexture("mond.jpg")
+        self.texture_mars = self.loadTexture("mars.jpg")
         myLight = Light()
 
         # Objekte als Stern definieren
         Sonne = Stern()
         Erde = Stern()
+        Mars = Stern()
         Mond = Stern()
         rotationSpeed = 1
         textureIsActive = True
@@ -89,15 +91,22 @@ class Sphere:
                 myLight.setupLighting()
 
             #glMatrixMode(GL_MODELVIEW)
+            #Sonne erstellen
             glTranslate(0,0,0)
             glBindTexture(GL_TEXTURE_2D, self.texture_sonne)
             Sonne.createObject(5, 200, 400)
             glRotate(rotationSpeed, 0, 1, 0)
-
+            # Erde erstellen
             glPushMatrix()
             glBindTexture(GL_TEXTURE_2D, self.texture_erde)
             glTranslate(20, 0, 0)
             Erde.createObject(2,200,400)
+            glPopMatrix()
+            #Mars erstellen
+            glPushMatrix()
+            glBindTexture(GL_TEXTURE_2D, self.texture_mars)
+            glTranslate(-29,0,5 )
+            Erde.createObject(1.2,200,400)
             glPopMatrix()
 
             # Mond erstellern
