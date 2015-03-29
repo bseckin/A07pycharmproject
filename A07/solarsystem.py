@@ -1,17 +1,13 @@
 from PIL import Image
 import pygame
-import sys
 from pygame.locals import *
-from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
-from Stern import Stern
-from Light import Light
+from A07.GLObject import GLObject
+from A07.Light import Light
 
 
-name = 'ball_glut'
-
-class Sphere:
+class Solarsystem:
     def main(self):
         """
         initialisiert pygame und erstellt opengl objekte
@@ -19,25 +15,27 @@ class Sphere:
         """
         pygame.init()
         display = (800, 600)
-        pygame.display.set_mode(display, DOUBLEBUF|OPENGL)
+        pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
         pygame.display.set_caption("A07 - Welcome to our solar system")
 
-        gluPerspective(59, (display[0]/display[1]), 0.1, 150.0)
-        gluLookAt(0.0, 0.0, 10, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-
+        gluPerspective(45, (display[0] / display[1]), 0.1, 1000.0)
+        #gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0)
+        gluLookAt(0, 0, 5, 0, 0, 0, 0, 1, 0)
         # Texturen laden
-        glEnable(GL_TEXTURE_2D) # Texturierung aktivieren
+        glEnable(GL_TEXTURE_2D)  # Texturierung aktivieren
         self.texture_sonne = self.loadTexture("sonne.jpg")
         self.texture_erde = self.loadTexture("erde.png")
         self.texture_mond = self.loadTexture("mond.jpg")
         self.texture_mars = self.loadTexture("mars.jpg")
+
+        # Licht initialisieren
         myLight = Light()
 
         # Objekte als Stern definieren
-        Sonne = Stern()
-        Erde = Stern()
-        Mars = Stern()
-        Mond = Stern()
+        Sonne = GLObject()
+        Erde = GLObject()
+        Mars = GLObject()
+        Mond = GLObject()
         rotationSpeed = 1
         textureIsActive = True
         lightON = True
@@ -54,13 +52,14 @@ class Sphere:
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RIGHT:
                         # Geschwind. von der Animation erhoehen
-                        if(rotationSpeed > 5):
+                        if (rotationSpeed > 5):
                             print("TOO FAST")
                         else:
                             rotationSpeed += 1
+                            #gluLookAt(0, 0, 1, 0, 0, 0, 0, 0, 1)
                     if event.key == pygame.K_LEFT:
                         # Geschwind. verlangsamen bzw. stoppen
-                        if(rotationSpeed <= 0):
+                        if (rotationSpeed <= 0):
                             print("STOPPED ANIMATION")
                             print(rotationSpeed)
                             rotationSpeed = 0
@@ -68,56 +67,55 @@ class Sphere:
                             rotationSpeed -= 1
                     if event.key == pygame.K_l:
                         print("PRESSED KEY L")
-                        if lightON == True:
+                        if lightON:
                             myLight.disableLight()
                             lightON = False
                         else:
                             lightON = True
 
-
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     print("MOUSE PRESSED!")
-                    if textureIsActive == True:        # Check ob Textur AN ist
+                    if textureIsActive:  # Check ob Textur AN ist
                         glDisable(GL_TEXTURE_2D)
                         textureIsActive = False
                     else:
                         glEnable(GL_TEXTURE_2D)
                         textureIsActive = True
 
-
-            glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
             # LICHT einschalten
-            if lightON == True:
+            if lightON:
                 myLight.setupLighting()
 
             #glMatrixMode(GL_MODELVIEW)
             #Sonne erstellen
-            glTranslate(0,0,0)
+            glTranslate(0, 0, 0)
             glBindTexture(GL_TEXTURE_2D, self.texture_sonne)
             Sonne.createObject(5, 200, 400)
             glRotate(rotationSpeed, 0, 1, 0)
+
             # Erde erstellen
             glPushMatrix()
             glBindTexture(GL_TEXTURE_2D, self.texture_erde)
             glTranslate(20, 0, 0)
-            Erde.createObject(2,200,400)
+            Erde.createObject(2, 200, 400)
             glPopMatrix()
+
             #Mars erstellen
             glPushMatrix()
             glBindTexture(GL_TEXTURE_2D, self.texture_mars)
-            glTranslate(-29,0,5 )
-            Erde.createObject(1.2,200,400)
+            glTranslate(-29, 0, 5)
+            Mars.createObject(1.2, 200, 400)
             glPopMatrix()
 
             # Mond erstellern
             glPushMatrix()
             glBindTexture(GL_TEXTURE_2D, self.texture_mond)
             glTranslate(23.5, 0, 0)
-            Mond.createObject(0.5, 200,400)
+            Mond.createObject(0.5, 200, 400)
             glPopMatrix()
 
             pygame.display.flip()
-            #pygame.time.wait(10) #unnötig eigentlich
 
     def loadTexture(self, pfad):
         """
@@ -125,7 +123,7 @@ class Sphere:
         :param pfad:
         :return:
         """
-        #Load texture file
+        # Load texture file
         data = Image.open(pfad)
         ix = data.size[0]
         iy = data.size[1]
@@ -140,8 +138,8 @@ class Sphere:
         # Create a MipMapped Texture
         glBindTexture(GL_TEXTURE_2D, textures)
 
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_LINEAR)
-        glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_LINEAR_MIPMAP_NEAREST)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST)
 
         gluBuild2DMipmaps(GL_TEXTURE_2D, 3, ix, iy, GL_RGBA, GL_UNSIGNED_BYTE, data)
 
@@ -149,5 +147,5 @@ class Sphere:
 
 
 if __name__ == '__main__':
-     s = Sphere()
-     s.main()
+    s = Solarsystem()
+    s.main()

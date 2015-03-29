@@ -1,0 +1,265 @@
+commit 0ef8782cffa7e887c0792a995da52409b9b7691d
+Author: coric <ncoric@student.tgm.ac.at>
+Date:   Sun Mar 29 12:16:23 2015 +0200
+
+    Mars erstellen
+
+ A07/.idea/workspace.xml               | 149 +++++++++++++++++++++++++++-------
+ A07/__pycache__/sphere.cpython-34.pyc | Bin 3249 -> 3404 bytes
+ A07/mars.jpg                          | Bin 0 -> 5735 bytes
+ A07/sphere.py                         |  13 ++-
+ 4 files changed, 132 insertions(+), 30 deletions(-)
+
+commit 321d2c9efd90a3df3e3e767b609f973f20c26649
+Author: coric <ncoric@student.tgm.ac.at>
+Date:   Sat Mar 28 12:36:33 2015 +0100
+
+    Mond Textur/Richtige Position
+
+ A07/.idea/workspace.xml                 |  90 +++++++++++++++++++++++---------
+ A07/Tutorial.py                         |   4 +-
+ A07/__pycache__/Light.cpython-34.pyc    | Bin 1202 -> 1196 bytes
+ A07/__pycache__/Stern.cpython-34.pyc    | Bin 852 -> 846 bytes
+ A07/__pycache__/Tutorial.cpython-34.pyc | Bin 1669 -> 1744 bytes
+ A07/__pycache__/res.cpython-34.pyc      | Bin 279097 -> 279091 bytes
+ A07/__pycache__/sphere.cpython-34.pyc   | Bin 3627 -> 3249 bytes
+ A07/mond.jpg                            | Bin 0 -> 601584 bytes
+ A07/sphere.py                           |  15 +++---
+ 9 files changed, 77 insertions(+), 32 deletions(-)
+
+commit b46a1b8a65548fca88f449b5dd433a92ea505f1e
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Sat Mar 28 12:12:56 2015 +0100
+
+    Licht OOP gemacht: Steuerbar mit L Taste
+    
+    man kann Licht ein und ausschalten mit L taste
+
+ A07/Light.py                            |  25 ++++++++++
+ A07/__pycache__/Light.cpython-34.pyc    | Bin 0 -> 1202 bytes
+ A07/__pycache__/Stern.cpython-34.pyc    | Bin 846 -> 852 bytes
+ A07/__pycache__/Tutorial.cpython-34.pyc | Bin 1663 -> 1669 bytes
+ A07/__pycache__/res.cpython-34.pyc      | Bin 279091 -> 279097 bytes
+ A07/__pycache__/sphere.cpython-34.pyc   | Bin 3620 -> 3627 bytes
+ A07/sphere.py                           |  81 ++++++++++++++------------------
+ 7 files changed, 60 insertions(+), 46 deletions(-)
+
+commit 86e781482d9c67c93609a29114ec6293ad7cb300
+Author: coric <ncoric@student.tgm.ac.at>
+Date:   Fri Mar 27 13:33:35 2015 +0100
+
+    Steuerung Tutorial zur Animation
+
+ A07/.idea/workspace.xml                    | 165 +++++++++++++++++++++--------
+ A07/Tutorial.py                            |  32 ++++--
+ A07/__pycache__/Stern.cpython-34.pyc       | Bin 852 -> 846 bytes
+ A07/__pycache__/Tutorial.cpython-34.pyc    | Bin 1234 -> 1663 bytes
+ A07/__pycache__/res.cpython-34.pyc         | Bin 279097 -> 279091 bytes
+ A07/__pycache__/sphere.cpython-34.pyc      | Bin 3352 -> 3620 bytes
+ A07/__pycache__/startScreen.cpython-34.pyc | Bin 0 -> 4331 bytes
+ A07/sphere.py                              |   4 +
+ 8 files changed, 149 insertions(+), 52 deletions(-)
+
+commit 5a64507980e49d4d32a64d166f709f93083d34d0
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Fri Mar 27 11:55:07 2015 +0100
+
+    Steuerung erstellt mit Pygame
+    
+    man kann schneller, langsamer mit den pfeiltasten machen - langsamer bis
+    zum vollständigen stoppen der animation
+    
+    mit mausklick kann man texturierung ein/aus schalten
+
+ A07/Stern.py                            |  28 ++++----
+ A07/Tutorial.py                         |   8 ++-
+ A07/__pycache__/Stern.cpython-34.pyc    | Bin 815 -> 852 bytes
+ A07/__pycache__/Tutorial.cpython-34.pyc | Bin 1228 -> 1234 bytes
+ A07/__pycache__/res.cpython-34.pyc      | Bin 279091 -> 279097 bytes
+ A07/__pycache__/sphere.cpython-34.pyc   | Bin 3377 -> 3352 bytes
+ A07/sphere.py                           | 111 +++++++++++++++-----------------
+ 7 files changed, 70 insertions(+), 77 deletions(-)
+
+commit 9284b24799f33d21db9263b9bcec7269babc47c3
+Author: coric <ncoric@student.tgm.ac.at>
+Date:   Wed Mar 25 23:58:32 2015 +0100
+
+    Tutorial V1
+    
+    Text wird nach den Klick auf den Tutorial Button angezeigt
+
+ A07/.idea/workspace.xml                 | 118 +++++++++++++++++++++-----------
+ A07/Tutorial.py                         |  43 ++++++++++++
+ A07/__pycache__/Tutorial.cpython-34.pyc | Bin 0 -> 1228 bytes
+ A07/__pycache__/res.cpython-34.pyc      | Bin 279097 -> 279091 bytes
+ A07/__pycache__/sphere.cpython-34.pyc   | Bin 3941 -> 3377 bytes
+ A07/startScreen.py                      |  14 +++-
+ 6 files changed, 131 insertions(+), 44 deletions(-)
+
+commit 62deef2829fa80727fe90f05d0578cc978a8c94c
+Author: coric <ncoric@student.tgm.ac.at>
+Date:   Wed Mar 25 21:43:29 2015 +0100
+
+    Objekte Separat
+    
+    Objekte werden nun in eigener Klasse erstellt. Aufruf in der sphere
+    klasse
+
+ A07/.idea/workspace.xml              | 128 +++++++++++++++++++++++++++--------
+ A07/Stern.py                         |  30 ++++++++
+ A07/__pycache__/Stern.cpython-34.pyc | Bin 0 -> 815 bytes
+ A07/sonne.jpg                        | Bin 0 -> 460713 bytes
+ A07/sphere.py                        |  19 +++---
+ A07/startScreen.py                   |   7 +-
+ 6 files changed, 144 insertions(+), 40 deletions(-)
+
+commit a06e7a8a2b95a08c27cf51728b31d85c309a7d2c
+Author: coric <ncoric@student.tgm.ac.at>
+Date:   Wed Mar 25 16:30:15 2015 +0100
+
+    Texturen
+    
+    Texturenmethode fertig + jedem Objekt kann Textur eingefügt werden
+
+ A07/.idea/A07Solarsystem.iml |   5 +-
+ A07/.idea/misc.xml           |   5 +-
+ A07/.idea/workspace.xml      | 303 +++++++++++++++++++++++--------------------
+ A07/sphere.py                |  99 ++++++++------
+ 4 files changed, 228 insertions(+), 184 deletions(-)
+
+commit 55b501dc7401004e00aa999d40e97e9957ff79c4
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Mon Mar 23 15:17:12 2015 +0100
+
+    drehung um Sonne+ besseres lciht
+    
+    drehungsursprung wird gesetzt mit
+    PushMatrix
+    ....sphere()...
+    PopMatrix
+
+ A07/Planet.py                         |  27 +++++++++
+ A07/__pycache__/sphere.cpython-34.pyc | Bin 2595 -> 3941 bytes
+ A07/erd.bmp                           | Bin 0 -> 2457654 bytes
+ A07/erde.png                          | Bin 0 -> 188611 bytes
+ A07/sphere.py                         | 111 +++++++++++++++++++++++++---------
+ A07/startScreen.py                    |   3 -
+ 6 files changed, 109 insertions(+), 32 deletions(-)
+
+commit 9ef0bacc7c2d8a56b3038dfa03ed716f4fdbedd4
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Mon Mar 9 12:54:11 2015 +0100
+
+    zooming mit pfeiltasten rauf/runter
+
+ A07/__pycache__/sphere.cpython-34.pyc | Bin 2330 -> 2595 bytes
+ A07/sphere.py                         |  26 +++++++++++++++++++++++---
+ A07/startScreen.py                    |   4 ++--
+ 3 files changed, 25 insertions(+), 5 deletions(-)
+
+commit 9671090a906fd5798c15f446ec6fe2ede570ed65
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Sun Mar 8 13:35:57 2015 +0100
+
+    ??
+
+ .gitignore | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit 957be60077811649f8faef0fcd389d3de1e32750
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Sun Mar 8 13:33:53 2015 +0100
+
+    Beleuchtung + rotation
+    
+    - keine farben aber
+    - keine textur
+    Rotation ist : glRotatef
+
+ .idea/A07pycharmproject.iml           |   9 ++++
+ .idea/encodings.xml                   |   5 ++
+ .idea/misc.xml                        |   5 ++
+ .idea/modules.xml                     |   9 ++++
+ .idea/vcs.xml                         |   7 +++
+ A07/__pycache__/sphere.cpython-34.pyc | Bin 2088 -> 2330 bytes
+ A07/sphere.py                         |  92 +++++++++++++++++++---------------
+ 7 files changed, 86 insertions(+), 41 deletions(-)
+
+commit 7b529efaab9c436aceb7ea9421bd3ff98f4c6e43
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Thu Mar 5 20:40:38 2015 +0100
+
+    GUI starte pygame szene
+
+ A07/__pycache__/sphere.cpython-34.pyc | Bin 0 -> 2088 bytes
+ A07/sphere.py                         |  54 ++++++++++++++++++++++++++++++++++
+ A07/startScreen.py                    |  33 +++++++++++++++++----
+ A07/test.py                           |  52 --------------------------------
+ 4 files changed, 82 insertions(+), 57 deletions(-)
+
+commit 079657f111bcf23d331c67cef45867bac1c4e799
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Thu Mar 5 20:02:19 2015 +0100
+
+    gitignore geht jetzt hahaha
+
+ .gitignore                      | 1 +
+ .idea/scopes/scope_settings.xml | 5 +++++
+ 2 files changed, 6 insertions(+)
+
+commit 15ecabb28076a2b5c6a176d51d8814f64284ff02
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Thu Mar 5 19:52:27 2015 +0100
+
+    workspaceignore
+
+ .idea/.name                     |   1 -
+ .idea/A07pycharmproject.iml     |   9 --
+ .idea/encodings.xml             |   5 -
+ .idea/misc.xml                  |  41 -----
+ .idea/modules.xml               |   9 --
+ .idea/scopes/scope_settings.xml |   5 -
+ .idea/vcs.xml                   |   7 -
+ .idea/workspace.xml             | 342 ----------------------------------------
+ 8 files changed, 419 deletions(-)
+
+commit 3c5a7b354fbfc4282926673f8bcc7dda45d4734c
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Thu Mar 5 19:49:54 2015 +0100
+
+    initialcommit2
+
+ .idea/.name                        |   1 +
+ .idea/A07pycharmproject.iml        |   9 +
+ .idea/encodings.xml                |   5 +
+ .idea/misc.xml                     |  41 +++++
+ .idea/modules.xml                  |   9 +
+ .idea/scopes/scope_settings.xml    |   5 +
+ .idea/vcs.xml                      |   7 +
+ .idea/workspace.xml                | 342 +++++++++++++++++++++++++++++++++++++
+ A07/__pycache__/res.cpython-34.pyc | Bin 0 -> 279097 bytes
+ 9 files changed, 419 insertions(+)
+
+commit 1328e57e9bbc28267d869781f8115451b9c3bf0f
+Author: Berkay Seckin <bseckin@student.tgm.ac.at>
+Date:   Thu Mar 5 19:46:54 2015 +0100
+
+    Initial commit
+
+ A07/.idea/.name                     |     1 +
+ A07/.idea/A07Solarsystem.iml        |     9 +
+ A07/.idea/encodings.xml             |     5 +
+ A07/.idea/misc.xml                  |    36 +
+ A07/.idea/modules.xml               |     9 +
+ A07/.idea/scopes/scope_settings.xml |     5 +
+ A07/.idea/vcs.xml                   |     7 +
+ A07/.idea/workspace.xml             |   565 ++
+ A07/A07 Splash Screen Version 3.jpg |   Bin 0 -> 278178 bytes
+ A07/A07.ui                          |   132 +
+ A07/a07res.qrc                      |     5 +
+ A07/freeglut.dll                    |   Bin 0 -> 218624 bytes
+ A07/pyuic5                          |     0
+ A07/res.py                          | 17428 ++++++++++++++++++++++++++++++++++
+ A07/startScreen.py                  |   112 +
+ A07/test.py                         |    52 +
+ 16 files changed, 18366 insertions(+)

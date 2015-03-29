@@ -3,28 +3,25 @@
 # Form implementation generated from reading ui file 'A07.ui'
 #
 # Created: Sat Feb 28 21:20:30 2015
-#      by: PyQt5 UI code generator 5.4
+# by: PyQt5 UI code generator 5.4
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtGui, QtWidgets
 from PyQt5.QtWidgets import *
 import sys
-from res import *
-from sphere import Sphere
-from Tutorial import Tutorial
+from A07.Tutorial import Tutorial
+from A07.res import *
+from A07.solarsystem import Solarsystem
+# from A07.Tutorial import Tutorial
 
-
-
+__author__ = 'SECKIN Berkay'
 # HINWEIS: Ui_MainWindow muss von QMainWindow erben nicht von "object"!
-
-
-
 
 class Ui_MainWindow(QMainWindow):
     def __init__(self, parent=None):
         """
-        Konstruktor
+        Konstruktor zum Starten des Startscreens
         :param parent:
         """
         super().__init__(parent)
@@ -32,7 +29,7 @@ class Ui_MainWindow(QMainWindow):
 
     def setupUi(self, MainWindow):
         """
-        ERSTELLT DIE GUI
+        SetUp fuer die Grafische Oberfläche: GUI Elemente werden hier angelegt und angepasst
         :param MainWindow:
         :return:
         """
@@ -124,19 +121,28 @@ class Ui_MainWindow(QMainWindow):
 
 
     def starteGUI(self):
+        """
+        Startet das Spiel
+        :return:
+        """
         self.close()
-        s = Sphere()
+        s = Solarsystem()
         s.main()
 
     def starteTUT(self):
+        """
+        Startet das Tutorial zum Spiel
+        :return:
+        """
         self.close()
         t = Tutorial()
-        t.test()
+        t.startTutorial()
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    view = Ui_MainWindow() #CREATE - VIEW
-    view.show()            #SHOW - View
+    view = Ui_MainWindow()  #CREATE - VIEW
+    view.show()  # SHOW - View
     sys.exit(app.exec_())  #EXECUTE Funktionen
 
 

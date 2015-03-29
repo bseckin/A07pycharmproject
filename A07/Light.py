@@ -1,11 +1,12 @@
-__author__ = 'Berkay'
-from pygame.locals import *
-from OpenGL.GLUT import *
-from OpenGL.GLU import *
+__author__ = 'SECKIN Berkay'
 from OpenGL.GL import *
 
 class Light:
     def setupLighting(self):
+        """
+        Erlaubt und erstellt anschließend eine Beleuchtung in opengl
+        :return:
+        """
         glClearColor(0.,0.,0.,1.)
         glShadeModel(GL_SMOOTH)
         glEnable(GL_CULL_FACE)
@@ -20,6 +21,9 @@ class Light:
         glEnable(GL_LIGHT0)
 
     def disableLight(self):
-
+        """
+        Deaktiviert die Beleuchtung
+        :return:
+        """
         glDisable(GL_LIGHTING)
         glDisable(GL_LIGHT0)

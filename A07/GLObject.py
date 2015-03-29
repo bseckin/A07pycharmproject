@@ -4,13 +4,7 @@ from OpenGL.GLU import *
 from OpenGL.GL import *
 
 
-class Stern:
-
-    #def__init__(self,radius, slices, stacks)
-        #self.Radius = radius
-        #self.Slices = slices
-       # self.Stacks = stacks
-
+class GLObject:
     def createObject(self, radius, slices, stacks):
         """
         Erstellt eine Kugel mit gluSphere und erlaubt Texturierung darauf
