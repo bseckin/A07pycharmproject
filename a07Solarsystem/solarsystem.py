@@ -3,8 +3,8 @@ import pygame
 from pygame.locals import *
 from OpenGL.GLU import *
 from OpenGL.GL import *
-from a07Solarsystem.GLObject import GLObject
-from a07Solarsystem.Light import Light
+from GLObject import GLObject
+from Light import Light
 
 
 class Solarsystem:

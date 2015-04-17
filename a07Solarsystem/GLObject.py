@@ -14,10 +14,15 @@ class GLObject:
         :param stacks:
         :return:
         """
-        sphere = gluNewQuadric()
-        gluQuadricNormals(sphere, GLU_SMOOTH)
-        gluQuadricTexture(sphere, GL_TRUE)
-        gluSphere(sphere, radius, slices, stacks)
+        if radius > 0:
+            sphere = gluNewQuadric()
+            gluQuadricNormals(sphere, GLU_SMOOTH)
+            gluQuadricTexture(sphere, GL_TRUE)
+            gluSphere(sphere, radius, slices, stacks)
+        else:
+            raise TypeError("Radius darf nicht negativ sein!")
+
+
 
 
 
