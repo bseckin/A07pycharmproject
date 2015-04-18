@@ -90,28 +90,28 @@ class Solarsystem:
             #Sonne erstellen
             glTranslate(0, 0, 0)
             glBindTexture(GL_TEXTURE_2D, self.texture_sonne)
-            Sonne.createObject(5, 200, 400)
+            Sonne.erstelleObjekt(5, 200, 400)
             glRotate(rotationSpeed, 0, 1, 0)
 
             # Erde erstellen
             glPushMatrix()
             glBindTexture(GL_TEXTURE_2D, self.texture_erde)
             glTranslate(20, 0, 0)
-            Erde.createObject(2, 200, 400)
+            Erde.erstelleObjekt(2, 200, 400)
             glPopMatrix()
 
             #Mars erstellen
             glPushMatrix()
             glBindTexture(GL_TEXTURE_2D, self.texture_mars)
             glTranslate(-29, 0, 5)
-            Mars.createObject(1.2, 200, 400)
+            Mars.erstelleObjekt(1.2, 200, 400)
             glPopMatrix()
 
             # Mond erstellern
             glPushMatrix()
             glBindTexture(GL_TEXTURE_2D, self.texture_mond)
             glTranslate(23.5, 0, 0)
-            Mond.createObject(0.5, 200, 400)
+            Mond.erstelleObjekt(0.5, 200, 400)
             glPopMatrix()
 
             pygame.display.flip()
@@ -123,10 +123,13 @@ class Solarsystem:
         :param pfad:
         """
         # Load texture file
-        data = Image.open(pfad)
-        ix = data.size[0]
-        iy = data.size[1]
-        data = data.tostring("raw", "RGBX", 0, -1)
+        try:
+            data = Image.open(pfad)
+            ix = data.size[0]
+            iy = data.size[1]
+            data = data.tostring("raw", "RGBX", 0, -1)
+        except AttributeError:
+            print("Bitte pfad zur textur korrekt eingebn")
 
         # Create textures
         textures = glGenTextures(1)

@@ -5,7 +5,7 @@ from OpenGL.GL import *
 
 
 class GLObject:
-    def createObject(self, radius, slices, stacks):
+    def erstelleObjekt(self, radius, slices, stacks):
         """
         Erstellt eine Kugel mit gluSphere und erlaubt Texturierung darauf
 
@@ -19,7 +19,7 @@ class GLObject:
             gluQuadricNormals(sphere, GLU_SMOOTH)
             gluQuadricTexture(sphere, GL_TRUE)
             gluSphere(sphere, radius, slices, stacks)
-        else:
+        elif radius <= 0:
             raise TypeError("Radius darf nicht negativ sein!")
 
 
